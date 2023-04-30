@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>Drawing Tool</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="500" height="500"></canvas>
+<button id="rectangle-button">Add Rectangle</button>
+<button id="circle-button">Add Circle</button>
+
+<script>
+    // Singleton pattern - there should only be one instance of DrawingTool
+    const DrawingToolSingleton = (function () {
+        let instance;
+
+        function createInstance() {
+            const shapes = [];
+
+            return {
+                addShape: function (shape) {
+                    shapes.push(shape);
+                },
+                getShapes: function () {
+                    return shapes;
+                }
+            };
+        }
+
+        return {
+            getInstance: function () {
+                if (!instance) {
+                    instance = createInstance();
+                }
+                return instance;
+            }
+        };
+    })();
+
+    // Builder pattern - creates Shape objects
+    class ShapeBuilder {
+        constructor() {
+            this.x = 0;
+            this.y = 0;
+            this.color = '#000';
+            this.size = 50;
+        }
+
+        setX(x) {
+            this.x = x;
+            return this;
+        }
+
+        setY(y) {
+            this.y = y;
+            return this;
+        }
+
+        setColor(color) {
+            this.color = color;
+            return this;
+        }
+
+        setSize(size) {
+            this.size = size;
+            return this;
+        }
+
+        build() {
+            return new Shape(this.x, this.y, this.color, this.size);
+        }
+    }
+
+    // Prototype pattern - clones Shape objects
+    class Shape {
+        constructor(x, y, color, size) {
+            this.x = x;
+            this.y = y;
+            this.color = color;
+            this.size = size;
+        }
+
+        clone() {
+            return new Shape(this.x, this.y, this.color, this.size);
+        }
+    }
+
+    // Abstract Factory pattern - creates concrete Shape objects
+    class ShapeFactory {
+        constructor(builder) {
+            this.builder = builder;
+        }
+
+        createRectangle(x, y) {
+            return this.builder
+                .setX(x)
+                .setY(y)
+                .setColor('#f00')
+                .build();
+        }
+
+        createCircle(x, y) {
+            return this.builder
+                .setX(x)
+                .setY(y)
+                .setColor('#0f0')
+                .build();
+        }
+    }
+
+    // The DrawingTool class
+    class DrawingTool {
+        constructor() {
+            this.canvas = document.getElementById('canvas');
+            this.ctx = this.canvas.getContext('2d');
+            this.factory = new ShapeFactory(new ShapeBuilder());
+            this.shapes = DrawingToolSingleton.getInstance();
+        }
+
+        addShape(shape) {
+            this.shapes.addShape(shape);
+        }
+
+        createRectangle(x, y) {
+            return this.factory.createRectangle(x, y);
+        }
+
+        createCircle(x, y) {
+            return this.factory.createCircle(x, y);
+        }
+
+        drawShapes() {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            const shapes = this.shapes.getShapes();
+            for (let i = 0; i < shapes.length; i++) {
+                const shape = shapes[i];
+                if (shape instanceof Rectangle) {
+                    this.ctx.fillStyle =
+                        shape.color;
+                    this.ctx.fillRect(shape.x, shape.y, shape.size, shape.size);
+                } else if (shape instanceof Circle) {
+                    this.ctx.fillStyle = shape.color;
+                    this.ctx.beginPath();
+                    this.ctx.arc(shape.x, shape.y, shape.size/2, 0, 2*Math.PI);
+                    this.ctx.fill();
+                }
+            }
+        }
+    }
+
+    // Concrete Rectangle and Circle classes
+    class Rectangle extends Shape {}
+    class Circle extends Shape {}
+
+    // Create a new DrawingTool instance
+    const drawingTool = new DrawingTool();
+
+    // Add event listeners to the buttons
+    document.getElementById('rectangle-button').addEventListener('click', () => {
+        const x = Math.floor(Math.random() * (drawingTool.canvas.width - 50));
+        const y = Math.floor(Math.random() * (drawingTool.canvas.height - 50));
+        const rectangle = drawingTool.createRectangle(x, y);
+        drawingTool.addShape(rectangle);
+        drawingTool.drawShapes();
+        console.log(1)
+    });
+
+    document.getElementById('circle-button').addEventListener('click', () => {
+        const x = Math.floor(Math.random() * (drawingTool.canvas.width - 50));
+        const y = Math.floor(Math.random() * (drawingTool.canvas.height - 50));
+        const circle = drawingTool.createCircle(x, y);
+        drawingTool.addShape(circle);
+        drawingTool.drawShapes();
+        console.log(2)
+    });
+</script>
+</body>
+</html>
