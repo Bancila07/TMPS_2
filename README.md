@@ -6,10 +6,13 @@ Pentru a citi și înțelege mai bine codul, urmăriți comentariile care explic
 
 >Modelul Singleton garantează că există doar o instanță a unei anumite clase. În acest caz, clasa este DrawingToolSingleton, care definește o instanță unică a instrumentului de desenare și metode pentru a adăuga și a obține forme desenate.
 ![singleton.PNG](singleton.PNG)
+
 >Modelul Builder este folosit pentru a crea obiecte complexe prin setarea progresivă a valorilor pentru diferitele proprietăți ale obiectului. Clasa ShapeBuilder definește o astfel de abordare pentru crearea formelor de desen.
 ![img.png](img.png)
 ![img_2.png](img_2.png)
+
 > Modelul Prototype este utilizat pentru a clona obiecte existente, în loc să se creeze noi obiecte de fiecare dată când este necesară o instanță. Clasa Shape definește o metodă de clonare, astfel încât obiectele de formă pot fi clonate în loc să fie create.
 ![img_1.png](img_1.png)
+
 >Modelul Abstract Factory oferă o interfață comună pentru crearea unui grup de obiecte legate sau dependente, în acest caz forme de desen. Clasa ShapeFactory folosește un obiect Builder pentru a crea instanțe concrete ale claselor Rectangle și Circle, ambele fiind forme de desen cu proprietăți diferite.
 ![img_3.png](img_3.png)
