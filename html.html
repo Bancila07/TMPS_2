@@ -3,8 +3,20 @@
 <head>
     <title>Drawing Tool</title>
     <style>
+        body {
+             margin: 0;
+             padding: 0;
+         }
+
         canvas {
+            display: block;
+            margin: 0 auto;
             border: 1px solid #000;
+        }
+
+        button {
+            display: block;
+            margin: 10px auto;
         }
     </style>
 </head>
@@ -95,21 +107,25 @@
             this.builder = builder;
         }
 
-        createRectangle(x, y) {
+        createRectangle(x, y, color = '#000') {
             return this.builder
                 .setX(x)
                 .setY(y)
-                .setColor('#f00')
+                .setColor(color)
+                .setSize(50)
                 .build();
         }
 
-        createCircle(x, y) {
+
+        createCircle(x, y, color) {
             return this.builder
                 .setX(x)
                 .setY(y)
-                .setColor('#0f0')
+                .setColor(color)
+                .setSize(25)
                 .build();
         }
+
     }
 
     // The DrawingTool class
@@ -134,13 +150,14 @@
         }
 
         drawShapes() {
-            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            console.log('Drawing shapes...');
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // ștergi tot ce era înainte pe canvas
             const shapes = this.shapes.getShapes();
             for (let i = 0; i < shapes.length; i++) {
                 const shape = shapes[i];
+                console.log(`Drawing shape ${i}: ${shape.constructor.name}`);
                 if (shape instanceof Rectangle) {
-                    this.ctx.fillStyle =
-                        shape.color;
+                    this.ctx.fillStyle = shape.color;
                     this.ctx.fillRect(shape.x, shape.y, shape.size, shape.size);
                 } else if (shape instanceof Circle) {
                     this.ctx.fillStyle = shape.color;
@@ -150,6 +167,7 @@
                 }
             }
         }
+
     }
 
     // Concrete Rectangle and Circle classes
@@ -163,10 +181,10 @@
     document.getElementById('rectangle-button').addEventListener('click', () => {
         const x = Math.floor(Math.random() * (drawingTool.canvas.width - 50));
         const y = Math.floor(Math.random() * (drawingTool.canvas.height - 50));
-        const rectangle = drawingTool.createRectangle(x, y);
+        const color = prompt('Enter color for rectangle:', '#f00');
+        const rectangle = drawingTool.createRectangle(x, y, color);
         drawingTool.addShape(rectangle);
         drawingTool.drawShapes();
-        console.log(1)
     });
 
     document.getElementById('circle-button').addEventListener('click', () => {
