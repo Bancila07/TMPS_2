@@ -1,4 +1,4 @@
-Despre aplicație
+# Despre aplicație
 
 >Acesta este un cod pentru o unealtă de desenare pe care utilizatorii o pot utiliza pentru a adăuga cercuri și dreptunghiuri pe o zonă de desen. Codul este scris în limbajul HTML, CSS și JavaScript și este structurat într-un mod modular, folosind modele de design precum Singleton, Builder, Prototype și Abstract Factory.
 
@@ -7,21 +7,21 @@ Despre aplicație
 >Pentru a citi și înțelege mai bine codul, urmăriți comentariile care explică modelele de design și componentele specifice ale codului. În plus, acest cod poate fi modificat și îmbunătățit pentru a se potrivi nevoilor dvs. specifice de dezvoltare a aplicațiilor web.
 
 
-Obiective
+# Obiective
 >1. Studiați și înțelegeți modelele de proiectare structurală.
 >2. Ca o continuare a lucrărilor anterioare de laborator,
 gândiți-vă la funcționalitățile pe care sistemul dumneavoastră va trebui să le ofere utilizatorului.
 >3. Implementați câteva funcționalități suplimentare sau creați un nou proiect
 folosind modele de proiectare structurală.
 
-Modele de design folosite
+# Modele de design folosite
 >Modelul Singleton
 >Modelul Builder
 >Modelul Prototype
 >Modelul Abstract Factory
 
 
-Implementation
+# Implementation
 >Modelul Singleton garantează că există doar o instanță a unei anumite clase. În acest caz, clasa este DrawingToolSingleton, care definește o instanță unică a instrumentului de desenare și metode pentru a adăuga și a obține forme desenate.
 ![singleton.PNG](singleton.PNG)
 
@@ -35,7 +35,7 @@ Implementation
 >Modelul Abstract Factory oferă o interfață comună pentru crearea unui grup de obiecte legate sau dependente, în acest caz forme de desen. Clasa ShapeFactory folosește un obiect Builder pentru a crea instanțe concrete ale claselor Rectangle și Circle, ambele fiind forme de desen cu proprietăți diferite.
 ![img_3.png](img_3.png)
 
-Conclusion
+# Conclusion
 >În implementarea prezentată, am folosit următoarele modele de proiectare:
 
 >Singleton: asigură că există doar o instanță a unei clase (DrawingToolSingleton) pentru gestionarea formelor de desen.
