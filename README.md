@@ -21,7 +21,7 @@ folosind modele de proiectare structurală.
 >Modelul Abstract Factory
 
 
-# Implementation
+# Implementare
 >Modelul Singleton garantează că există doar o instanță a unei anumite clase. În acest caz, clasa este DrawingToolSingleton, care definește o instanță unică a instrumentului de desenare și metode pentru a adăuga și a obține forme desenate.
 ![singleton.PNG](singleton.PNG)
 
@@ -35,7 +35,7 @@ folosind modele de proiectare structurală.
 >Modelul Abstract Factory oferă o interfață comună pentru crearea unui grup de obiecte legate sau dependente, în acest caz forme de desen. Clasa ShapeFactory folosește un obiect Builder pentru a crea instanțe concrete ale claselor Rectangle și Circle, ambele fiind forme de desen cu proprietăți diferite.
 ![img_3.png](img_3.png)
 
-# Conclusion
+# Concluzie
 >În implementarea prezentată, am folosit următoarele modele de proiectare:
 
 >Singleton: asigură că există doar o instanță a unei clase (DrawingToolSingleton) pentru gestionarea formelor de desen.
